@@ -12,3 +12,19 @@ cleanup:
   Annotations:
     helm.sh/hook: pre-delete
     helm.sh/hook-delete-policy: hook-succeeded
+expose:
+  config:
+    domain: 40.117.123.135.nip.io
+    exposer: Ingress
+    http: "true"
+  Annotations:
+    helm.sh/hook: post-install,post-upgrade
+    helm.sh/hook-delete-policy: hook-succeeded
+jenkins:
+  Servers:
+    Global:
+      EnvVars:
+        DOCKER_REGISTRY: foxsugar.azurecr.io
+        TILLER_NAMESPACE: kube-system
+PipelineSecrets:
+  DockerConfig: '{"auths":{"foxsugar.azurecr.io":{"auth":"Zm94c3VnYXI6WFVBb2lEUHFDTHZBUUY1bVdOK2o3ZUZKYzFYd3hKVDY="}}}'
